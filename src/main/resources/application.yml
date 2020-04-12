@@ -6,3 +6,6 @@ spring:
     prefix: classpath:templates/
     suffix: .html
     cache: false
+logging:
+  level:
+    org.springframework.cache: TRACE
