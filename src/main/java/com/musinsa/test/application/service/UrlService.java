@@ -1,10 +1,8 @@
 package com.musinsa.test.application.service;
 
-import com.musinsa.test.application.repository.ShortenUrlCacheRepository;
 import com.musinsa.test.application.repository.ShortenUrlRepository;
-import com.musinsa.test.application.vo.ShortenUrl;
+import com.musinsa.test.application.repository.entity.ShortenUrl;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -13,8 +11,8 @@ public class UrlService {
 
     private final ShortenUrlRepository shortenUrlRepository;
 
-    public UrlService(ShortenUrlCacheRepository shortenUrlCacheRepository) {
-        this.shortenUrlRepository = shortenUrlCacheRepository;
+    public UrlService(ShortenUrlRepository shortenUrlRepository) {
+        this.shortenUrlRepository = shortenUrlRepository;
     }
 
     public ShortenUrl generateShortenUrl(String url) {
@@ -27,14 +25,11 @@ public class UrlService {
     }
 
     private ShortenUrl save(String url) {
-        ShortenUrl shortenUrl = ShortenUrl.builder()
-                .code(RandomStringUtils.randomAlphabetic(8))
-                .url(url)
-                .build();
+        ShortenUrl shortenUrl = new ShortenUrl(url);
+        shortenUrlRepository.save(shortenUrl);
 
         log.info("save shortenUrl : {}", shortenUrl);
 
-        shortenUrlRepository.save(shortenUrl);
         return shortenUrl;
     }
 
