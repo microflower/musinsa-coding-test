@@ -6,6 +6,12 @@ spring:
     prefix: classpath:templates/
     suffix: .html
     cache: false
-logging:
-  level:
-    org.springframework.cache: TRACE
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+  jpa.show-sql: true
+  jpa.properties.hibernate.format_sql: true
