@@ -12,5 +12,5 @@ $ git clone https://github.com/HeeChanKim/musinsa-coding-test.git
 ```
 $ cd musinsa-coding-test
 $ ./gradlew build
-$ sudo java -ar build/libs/test-0.0.1-SNAPSHOT.jar
+$ sudo java -jar build/libs/test-0.0.1-SNAPSHOT.jar
 ```
