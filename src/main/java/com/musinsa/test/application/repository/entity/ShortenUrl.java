@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Table
 @Entity
 @NoArgsConstructor
+@DynamicUpdate
 @ToString
 public class ShortenUrl {
     @Id
@@ -31,5 +33,9 @@ public class ShortenUrl {
     public ShortenUrl(String url) {
         this.code = RandomStringUtils.randomAlphabetic(8); //fixme: insert 시 중복 키 에러 발생할 수 있음
         this.url = url;
+    }
+
+    public void requested() {
+        requestCount++;
     }
 }
