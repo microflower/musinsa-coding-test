@@ -1,1 +1,36 @@
-this is home.
+<html>
+<head>
+    <script src="/js/lib/jquery-3.5.0.min.js"></script>
+</head>
+<body>
+
+URL : <input type="text" id="originUrl"><button type="button" onclick="shortening()">generate</button> <br>
+Generated Shorten URL : <a href="#" id="shortenUrl" target="_blank"></a>
+
+<script>
+    function shortening() {
+        $.ajax({
+            method: 'POST',
+            url: '/api/v1/shortenUrl',
+            data: $('#originUrl').val(),
+            contentType: 'text/plain',
+            dataType: 'json',
+            async: false
+        }).done(function(data) {
+            console.log(data);
+
+            if (data == null) {
+                alert('url shortening failed! please retry.');
+                return;
+            }
+
+            let shortenUrl = location.origin + '/' + data.code;
+            $('#shortenUrl').prop('href', shortenUrl);
+            $('#shortenUrl').text(shortenUrl);
+        });
+    }
+</script>
+
+</body>
+</html>
+

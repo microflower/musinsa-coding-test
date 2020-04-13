@@ -18,6 +18,7 @@ public class ApiController {
         this.urlService = urlService;
     }
 
+    //TODO: url validator 추가
     @PostMapping(value = "/shortenUrl", produces = MediaType.APPLICATION_JSON_VALUE)
     public ShortenUrl shortenUrl(@RequestBody String url) {
         return urlService.generateShortenUrl(url);
